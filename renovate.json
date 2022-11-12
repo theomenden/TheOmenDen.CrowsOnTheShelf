@@ -1,0 +1,14 @@
+{
+  "packageRules": [
+    {
+      "matchUpdateTypes": [ "minor", "patch", "pin", "digest" ],
+      "automerge": true,
+      "automergeStrategy": "squash"
+    }
+  ],
+  "rangeStrategy": "auto",
+  "extends": [
+    "config:base",
+    ":preserveSemverRanges"
+  ]
+}

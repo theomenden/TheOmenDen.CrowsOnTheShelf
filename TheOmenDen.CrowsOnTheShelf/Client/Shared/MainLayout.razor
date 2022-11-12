@@ -1,0 +1,46 @@
+﻿@inherits LayoutComponentBase
+
+<Layout>
+    <LayoutHeader Fixed>
+        <Bar Breakpoint="Breakpoint.Desktop"
+                 Background="Background.Dark"
+                 ThemeContrast="ThemeContrast.Dark"
+                 Shadow="Shadow.Default"
+                 Border="Border.Is2.Light.OnBottom.RoundedBottom"
+                 @bind-Visible="@_isTopBarVisible">
+            <Container>
+                <BarBrand>
+                    <BarItem>
+                        <BarLink To="" TextColor="TextColor.Light">
+                            <Image Display="Display.InlineBlock" Border="Border.RoundedCircle" Padding="Padding.Is1"
+                                   Background="Background.Dark"
+                                   Text="Voroletta in santa hat"
+                                   Style="width: 32px; height: 32px;"
+                                   Source="" />
+                            Crows on the shelf
+                        </BarLink>
+                    </BarItem>
+                </BarBrand>
+                <BarToggler />
+                <BarMenu>
+                    <BarStart>
+                        <BarItem>
+                            <BarLink To="">Home <BarIcon IconName="IconName.Dashboard" /></BarLink>
+                        </BarItem>
+                    </BarStart>
+                    <BarEnd>
+                        <BarItem>
+                            <LoginDisplay />
+                        </BarItem>
+                    </BarEnd>
+                </BarMenu>
+            </Container>
+            </Bar>
+    </LayoutHeader>
+    <LayoutContent Padding="Padding.Is4.OnX">
+        @Body
+    </LayoutContent>
+    <LayoutFooter>
+        <Footer />
+    </LayoutFooter>
+</Layout>
