@@ -1,0 +1,18 @@
+﻿<ListGroup Flush Background="Background.Dark">
+    <Repeater TItem="String" Items="_participants">
+        <ListGroupItem Name="@context" Background="Background.Transparent"
+                       Margin="Margin.IsAuto.OnX">
+            <Card Background="Background.Dark"
+                  Shadow="Shadow.Default"
+                  Border="Border.Is0.OnAll.Rounded"
+                  TextAlignment="TextAlignment.Start">
+                <CardBody>
+                    <Text TextColor="TextColor.Light">
+                        @context
+                        <Badge Color="Color.Primary"><Icon Name="IconName.CheckCircle" TextColor="TextColor.Light" /></Badge>
+                    </Text>
+                </CardBody>
+            </Card>
+        </ListGroupItem>
+    </Repeater>
+</ListGroup>

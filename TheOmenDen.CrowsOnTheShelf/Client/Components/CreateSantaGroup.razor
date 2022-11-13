@@ -1,0 +1,107 @@
+﻿<ModalHeader Background="Background.Dark">
+    <ModalTitle TextColor="TextColor.Light">
+        Create a Secret Santa Party
+    </ModalTitle>
+    <CloseButton Background="Background.Light" Border="Border.Is0.RoundedCircle" />
+</ModalHeader>
+<ModalBody Background="Background.Dark" TextColor="TextColor.Light">
+    <Form>
+        <Row Width="Width.Is100">
+            <Column ColumnSize="ColumnSize.IsThird">
+                <Field>
+                    <FieldLabel>
+                        Event Date and Time
+                    </FieldLabel>
+                    <DatePicker TValue="DateTime?" @bind-Date="@_occurringAt" />
+                </Field>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsThird">
+                <Field>
+                    <FieldLabel>
+                        Budget Per Person
+                    </FieldLabel>
+                    <NumericPicker TValue="Decimal?" @bind-Value="@_budget" />
+                </Field>
+            </Column>
+            <Column ColumnSize="ColumnSize.IsThird">
+                <Field>
+                    <FieldLabel>
+                        Restrictions on Gifts?
+                    </FieldLabel>
+                    <Switch TValue="Boolean" Color="Color.Primary" />
+                </Field>
+            </Column>
+        </Row>
+        <Row>
+            <Column ColumnSize="ColumnSize.IsHalf">
+                <Field>
+                    <FieldLabel>
+                        Email
+                        <TextEdit Role="TextRole.Email" @bind-Text="@_participantEmail" Placeholder="@("example@gmail.com")" />
+                    </FieldLabel>
+                    <Button Color="Color.Primary"
+                            Border="Border.Is2.Light.OnAll.Rounded"
+                            Shadow="Shadow.Default"
+                            Margin="Margin.Is2.OnX.Is1.OnY"
+                            Clicked="AddParticipantAsync"
+                            Block>
+                        Add To Participants
+                    </Button>
+                </Field>
+            </Column>
+        </Row>
+        <Row>
+            <Div ElementId="#list-group-animate-div">
+                <CardDeck ColumnSize="ColumnSize.IsFull" Background="Background.Dark">
+                    @if (_participantEmails.Any())
+                    {
+                        <Repeater TItem="String" Items="_participantEmails">
+                            <Animate Anchor="#list-group-animate-div"
+                                 Animation="Animations.FadeUp"
+                                 Auto
+                                 DelayMilliseconds="500">
+                                <Card Background="Background.Dark"
+                                  Shadow="Shadow.Default"
+                                  Border="Border.Is2.Secondary.OnAll.Rounded"
+                                  TextAlignment="TextAlignment.Start">
+                                    <CardBody Width="Width.Is100">
+                                        <Text TextColor="TextColor.Light">
+                                            @context
+                                            <Badge Color="Color.Primary"><Icon Name="IconName.CheckCircle" TextColor="TextColor.Light" /></Badge>
+                                        </Text>
+                                    </CardBody>
+                                </Card>
+                            </Animate>
+                        </Repeater>
+                    }
+                    else
+                    {
+                        <Card Background="Background.Transparent" 
+                              TextColor="TextColor.Light"
+                              Border="Border.Is0.Rounded">
+                            <CardBody>
+                                <Paragraph>
+                                    Add Participants by their email address
+                                </Paragraph>
+                            </CardBody>
+                        </Card>
+                    }
+                </CardDeck>
+            </Div>
+        </Row>
+    </Form>
+</ModalBody>
+<ModalFooter Background="Background.Dark" TextColor="TextColor.Light">
+    <Buttons Role="ButtonsRole.Toolbar" Flex="Flex.InlineFlex.Grow.Is1.JustifyContent.Between">
+        <Button Color="Color.Warning" Type="ButtonType.Reset"
+                Border="Border.Is1.Light.OnAll.Rounded"
+                Block>
+            Clear
+        </Button>
+        <Button Color="Color.Secondary" Clicked="CloseAsync"
+                Border="Border.Is1.Light.OnAll.Rounded"
+                Block>
+            Cancel
+        </Button>
+    </Buttons>
+</ModalFooter>

@@ -21,6 +21,7 @@ builder.Services.AddBlazorise(options => options.Immediate = false)
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("TheOmenDen.CrowsOnTheShelf.ServerAPI"));
 
+
 builder.Services.AddMsalAuthentication(options =>
 {
     builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);

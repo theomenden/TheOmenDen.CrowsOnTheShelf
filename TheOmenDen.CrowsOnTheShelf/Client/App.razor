@@ -1,25 +1,44 @@
 ﻿<CascadingAuthenticationState>
-    <Router AppAssembly="@typeof(App).Assembly">
-        <Found Context="routeData">
-            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
-                <NotAuthorized>
-                    @if (context.User.Identity?.IsAuthenticated != true)
-                    {
-                        <RedirectToLogin />
-                    }
-                    else
-                    {
-                        <p role="alert">You are not authorized to access this resource.</p>
-                    }
-                </NotAuthorized>
-            </AuthorizeRouteView>
-            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-        </Found>
-        <NotFound>
-            <PageTitle>Not found</PageTitle>
-            <LayoutView Layout="@typeof(MainLayout)">
-                <p role="alert">Sorry, there's nothing at this address.</p>
-            </LayoutView>
-        </NotFound>
-    </Router>
+    <Blazorise.ThemeProvider Theme="@_theme">
+        <Router AppAssembly="@typeof(App).Assembly">
+            <Found Context="routeData">
+                <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                    <NotAuthorized>
+                        @if (context.User.Identity?.IsAuthenticated != true)
+                        {
+                            <RedirectToLogin />
+                        }
+                        else
+                        {
+                            <Alert>You are not authorized to access this resource.</Alert>
+                        }
+                    </NotAuthorized>
+                </AuthorizeRouteView>
+                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            </Found>
+            <NotFound>
+                <PageTitle>Not found</PageTitle>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <Alert>Sorry, there's nothing at this address.</Alert>
+                </LayoutView>
+            </NotFound>
+        </Router>
+        <ModalProvider UseModalStructure Animated  />
+        <NotificationProvider />
+        <PageProgressProvider />
+        <ApplicationLoadingIndicator />
+    </Blazorise.ThemeProvider>
 </CascadingAuthenticationState>
+@code {
+
+    private readonly Theme _theme = new()
+        {
+            ColorOptions = new()
+            {
+                Primary = "#8050bb",
+                Secondary = "#8bbb50",
+                Light = "#c8dfac",
+                Dark = "#000"
+            }
+        };
+}

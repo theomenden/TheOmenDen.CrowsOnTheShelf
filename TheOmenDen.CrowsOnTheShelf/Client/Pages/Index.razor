@@ -4,7 +4,20 @@
 
 <Jumbotron Background="Background.Dark"
            TextColor="TextColor.Light"
-           TextAlignment="TextAlignment.Center">
+           TextAlignment="TextAlignment.Center"
+           Margin="Margin.Is3.OnY.Is2.OnX"
+           Padding="Padding.Is3.OnX"
+           Shadow="Shadow.Large">
     <JumbotronTitle>Welcome to Crows on the shelf</JumbotronTitle>
     <JumbotronSubtitle>A secret santa client</JumbotronSubtitle>
 </Jumbotron>
+<Row Flex="Flex.AlignContent.Center.JustifyContent.Around">
+    <Column ColumnSize="ColumnSize.IsHalf">
+        <Button Clicked="LaunchCreateSantaGroupAsync"
+                Color="Color.Primary"
+                Border="Border.Is2.Light.OnAll.Rounded"
+                Shadow="Shadow.Default"
+                Margin="Margin.Is2.OnX"
+                Block>Create Group</Button>
+    </Column>
+</Row>

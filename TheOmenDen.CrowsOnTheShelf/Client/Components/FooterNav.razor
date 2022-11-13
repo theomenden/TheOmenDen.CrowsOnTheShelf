@@ -1,5 +1,7 @@
-﻿<Container Fluid Background="Background.Dark" TextColor="TextColor.Light">
-    <Row>
+﻿<Container Fluid Background="Background.Dark" TextColor="TextColor.Light"
+           Border="Border.Is2.Light.OnTop.RoundedTop"
+           Shadow="Shadow.Default">
+    <Row Flex="Flex.Row.Grow.Is1">
         <Column ColumnSize="ColumnSize.IsFull.IsThird.OnDesktop">
             <Heading Size="HeadingSize.Is5">Our Company</Heading>
             <UnorderedList TextColor="TextColor.Light">
@@ -27,17 +29,14 @@
             </UnorderedList>
         </Column>
         <Column ColumnSize="ColumnSize.IsFull.IsThird.OnDesktop">
-            Powered by
-            <Blazorise.Link TextColor="TextColor.Secondary" Class="text-decoration-none"
-                            To="https://blazorise.com/" Target="Target.Blank"
-                            Title="Blazorise">Blazorise</Blazorise.Link>
-            <Small Margin="Margin.Is3.FromBottom" TextColor="TextColor.Muted">Copyright <Icon Name="IconName.Copyright" TextColor="TextColor.Muted"/> @DateTime.Today.Year Megabit Ltd</Small>
-        </Column>
-        <Column ColumnSize="ColumnSize.IsFull.IsThird.OnDesktop">
             <Heading Size="HeadingSize.Is5">Information</Heading>
             <UnorderedList>
                 <UnorderedListItem Margin="Margin.Is1.FromBottom">
-                    <Small>The Omen Den L.L.C.<Icon Name="@("fa fa-trademark")" /> @DateTime.Today.Year</Small>
+                    <Small>
+                        <Image Fluid Source="../../Assets/TheOmenDenForDarkTheme.svg" 
+                               Text="The Omen Den Logo"
+                               Style="width:calc(40% - 2rem);height:calc(40% - 2rem);"/> L.L.C.<Icon Name="@("fa fa-trademark")" /> @DateTime.Today.Year
+                    </Small>
                 </UnorderedListItem>
                 <UnorderedListItem Margin="Margin.Is1.FromBottom">
                     <Small><Icon Name="IconName.Code"/>Version - 0.11.12427</Small>
@@ -46,6 +45,13 @@
                     <Small>By using this site, you agree to our Terms of Service (TOS) and Privacy Policy</Small>
                 </UnorderedListItem>
             </UnorderedList>
+        </Column>
+        <Column ColumnSize="ColumnSize.IsFull.IsThird.OnDesktop">
+                Powered by
+                <Blazorise.Link TextColor="TextColor.Secondary" Class="text-decoration-none"
+                                To="https://blazorise.com/" Target="Target.Blank"
+                                Title="Blazorise">Blazorise</Blazorise.Link>
+                <Small Margin="Margin.Is3.FromBottom" TextColor="TextColor.Muted">Copyright <Icon Name="IconName.Copyright" TextColor="TextColor.Muted"/> @DateTime.Today.Year Megabit Ltd</Small>
         </Column>
     </Row>
 </Container>
