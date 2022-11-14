@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheOmenDen.CrowsOnTheShelf.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheOmenDen.CrowsOnTheShelf.Shared", "TheOmenDen.CrowsOnTheShelf\Shared\TheOmenDen.CrowsOnTheShelf.Shared.csproj", "{109DE721-1AA5-4BF4-A018-993548C9F5C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheOmenDen.CrowsOnTheShelf.Data", "TheOmenDen.CrowsOnTheShelf.Data\TheOmenDen.CrowsOnTheShelf.Data.csproj", "{E59B8A8E-0A67-447F-890C-F34F46B44B15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheOmenDen.CrowsOnTheShelf.Data", "TheOmenDen.CrowsOnTheShelf.Data\TheOmenDen.CrowsOnTheShelf.Data.csproj", "{E59B8A8E-0A67-447F-890C-F34F46B44B15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

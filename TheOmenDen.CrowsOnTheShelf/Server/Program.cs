@@ -6,6 +6,7 @@ using Serilog;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Builder;
 using TheOmenDen.CrowsOnTheShelf.Server.Hubs;
+using SendGrid.Extensions.DependencyInjection;
 
 #region Bootstrap Logger
 Log.Logger = new LoggerConfiguration()
@@ -35,6 +36,7 @@ try
         .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
         .AddInMemoryTokenCaches();
 
+    builder.Services.AddSendGrid(options => options.ApiKey = builder.Configuration["crowsagainstemails"]);
     builder.Services.AddSignalR();
     builder.Services.AddResponseCompression(opts =>
     {
