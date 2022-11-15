@@ -29,6 +29,10 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    builder.Logging
+        .ClearProviders()
+        .AddSerilog();
+
 // Add services to the container.
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"))

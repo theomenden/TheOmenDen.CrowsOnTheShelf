@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+using TheOmenDen.Shared.Extensions;
 
 namespace TheOmenDen.CrowsOnTheShelf.Shared.Services;
 public sealed record GameCodeGenerator

@@ -25,8 +25,6 @@ public sealed class SendEmailService
         var fromAddress = new EmailAddress(supportEmailAddress, supportTeamName );
         var recipients = new List<EmailAddress>();
 
-        var personalization = new Personalization();
-
         msg.SetSubject("You've been invited to a gift exchange!");
         msg.SetFrom(fromAddress);
         msg.AddTos(recipients);
