@@ -7,10 +7,10 @@ namespace TheOmenDen.CrowsOnTheShelf.Server.Spaces;
 public class RoomStateLobby: IRoomState
 {
     private readonly Room _room;
-    private readonly Func<Room, Task> _eventEndedCallback;
+    private readonly Func<Room, CancellationToken, Task> _eventEndedCallback;
     private Int32 _entryCount = 0;
 
-    internal RoomStateLobby(Room room, Func<Room, Task> eventEndedCallback)
+    internal RoomStateLobby(Room room, Func<Room, CancellationToken, Task> eventEndedCallback)
     {
             _room= room;
             _eventEndedCallback = eventEndedCallback;
@@ -20,7 +20,7 @@ public class RoomStateLobby: IRoomState
     {
         if (_entryCount > 0)
         {
-            await _eventEndedCallback(_room);
+            await _eventEndedCallback(_room, cancellationToken);
         }
         _entryCount++;
     }

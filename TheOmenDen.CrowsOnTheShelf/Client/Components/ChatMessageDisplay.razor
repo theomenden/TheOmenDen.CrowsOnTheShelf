@@ -1,0 +1,11 @@
+﻿<Div Margin="Margin.Is3.FromStart" Background="Background.Transparent">
+    @if (Message.MessageType == CrowsOnTheShelf.Shared.Models.Enumerations.ChatMessageType.Chat)
+    {
+        <Span TextWeight="TextWeight.Bold" TextColor="TextColor.Primary">@($"{Message.ParticipantName}: ")</Span>
+        <Span TextOverflow="TextOverflow.Wrap">@Message.Message</Span>
+    }
+    @if (Message.MessageType == CrowsOnTheShelf.Shared.Models.Enumerations.ChatMessageType.EventFlow)
+    {
+        <Span TextColor="TextColor.Muted" TextWeight="TextWeight.Light">@Message.Message</Span>
+    }
+</Div>

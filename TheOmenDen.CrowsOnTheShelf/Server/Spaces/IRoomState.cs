@@ -6,5 +6,5 @@ internal interface IRoomState
 {
     Task EnterAsync(CancellationToken cancellationToken = default);
     Task AddParticipantAsync(Participant participant, bool isReconnection, CancellationToken cancellationToken = default);
-    Task RemovePlayerAsync(Participant contact, CancellationToken cancellationToken = default);
+    Task RemovePlayerAsync(Participant participant, CancellationToken cancellationToken = default);
 }

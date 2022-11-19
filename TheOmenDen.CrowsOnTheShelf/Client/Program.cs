@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using TheOmenDen.CrowsOnTheShelf.Client;
+using TheOmenDen.CrowsOnTheShelf.Client.Extensions;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -21,6 +22,7 @@ builder.Services.AddBlazorise(options => options.Immediate = false)
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("TheOmenDen.CrowsOnTheShelf.ServerAPI"));
 
+builder.Services.AddSecretSantaServices();
 
 builder.Services.AddMsalAuthentication(options =>
 {

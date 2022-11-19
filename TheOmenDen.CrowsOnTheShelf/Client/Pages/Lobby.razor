@@ -1,0 +1,31 @@
+﻿@page "/lobby"
+@using TheOmenDen.CrowsOnTheShelf.Shared.Models.Dto
+@inherits BasePage
+<Div Height="Height.Is100"
+     Display="Display.Flex"
+     Flex="Flex.Row.AlignItems.Stretch.JustifyContent.Between">
+    <Div Height="Height.Is100"
+         Width="Width.Is100"
+         Padding="Padding.Is2.OnY"
+         TextOverflow="TextOverflow.Wrap">
+        <ListGroup Flush
+                   Mode="ListGroupMode.Selectable"
+                   @bind-SelectedItem="_selectedAwaitingRoom">
+            <Repeater TItem="RoomStateDTO" Items="_roomsAwaiting">
+                <ListGroupItem Name="@context.RoomName">
+                    <RoomListItem Room="@context" />
+                </ListGroupItem>
+            </Repeater>
+        </ListGroup>
+        <Paragraph>Events In Progress</Paragraph>
+        <ListGroup Flush
+                   Mode="ListGroupMode.Selectable"
+                   @bind-SelectedItem="_selectedInProgressRoom">
+            <Repeater TItem="RoomStateDTO" Items="_roomsInProgress">
+                <ListGroupItem Name="@context.RoomName">
+                    <RoomListItem Room="@context" />
+                </ListGroupItem>
+            </Repeater>
+        </ListGroup>
+        </Div>
+</Div>

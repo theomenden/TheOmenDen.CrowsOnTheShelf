@@ -4,7 +4,7 @@ namespace TheOmenDen.CrowsOnTheShelf.Server.Lobbies;
 
 public sealed class EventTimer: IDisposable
 {
-    private System.Timers.Timer _timer;
+    private readonly System.Timers.Timer _timer;
     private DateTime _startTime;
     private DateTime _nextTrigger;
 
@@ -18,7 +18,8 @@ public sealed class EventTimer: IDisposable
         _timer.Elapsed+= handler;
     }
 
-    public double TimeElapsed => (DateTime.UtcNow - _startTime).TotalMilliseconds;
+    public double TimeElapsed => (_startTime - DateTime.UtcNow).TotalMilliseconds;
+
     public double TimeRemaining => (_nextTrigger - DateTime.UtcNow).TotalMilliseconds;
 
     public double Change(double multiplier)

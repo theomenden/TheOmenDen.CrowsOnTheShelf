@@ -13,16 +13,33 @@ namespace TheOmenDen.CrowsOnTheShelf.Server.Lobbies;
 public class Lobby
 {
     private readonly ILogger<Lobby> _logger;
-    private IHubContext<SecretSantaHub> _hubContext;
-    private List<Room> _rooms = new List<Room>(10);
-    private Dictionary<Participant, Room> _participantToRoomsDictionary = new(30);
-    private string lobbyGroupName = Guid.NewGuid().ToString();
+    private readonly IHubContext<SecretSantaHub> _hubContext;
+    private readonly List<Room> _rooms = new (10);
+    private readonly Dictionary<Participant, Room> _participantToRoomsDictionary = new(30);
+    private readonly string _lobbyGroupName = Guid.NewGuid().ToString();
 
     public Lobby(IHubContext<SecretSantaHub> hubContext, ILogger<Lobby> logger)
     {
         _logger= logger;
         _hubContext= hubContext;
-        Enumerable.Range(0, 10).ForEach(i => AddRoomAsync(new()));
+
+        for (var i = 0; i < 15; i++)
+        {
+            AddRoom(new PublicRoom(_hubContext, $"Room {i}", new RoomSettings(), EventEndedAsync));
+        }
+    }
+
+    internal void AddRoom(Room room)
+    {
+        int count; 
+        lock (_rooms)
+        {
+            _rooms.Add(room);
+            count= _rooms.Count;
+        }
+
+        _logger.LogInformation("Room added. Index: {Index}. Name: {Name}. Active Rooms: {Count}", room.RoomIndex,
+            room.RoomName, count);
     }
 
     internal IEnumerable<Participant>? GetParticipantsInRoom(String roomName)
@@ -37,10 +54,20 @@ public class Lobby
     }
 
     internal Task AddParticipantAsync(Participant participant, CancellationToken cancellationToken = default)
-        => _hubContext.Groups.AddToGroupAsync(participant.ConnectionId, lobbyGroupName, cancellationToken: cancellationToken);
+        => _hubContext.Groups.AddToGroupAsync(participant.ConnectionId, _lobbyGroupName, cancellationToken: cancellationToken);
 
     internal Task RemoveParticipant(Participant participant, CancellationToken cancellationToken = default)
-    => _hubContext.Groups.RemoveFromGroupAsync(participant.ConnectionId, lobbyGroupName, cancellationToken: cancellationToken);
+    => _hubContext.Groups.RemoveFromGroupAsync(participant.ConnectionId, _lobbyGroupName, cancellationToken: cancellationToken);
+
+    internal async Task ParticipantReconnected(Participant participant, Room room, CancellationToken cancellationToken = default)
+    {
+        await _hubContext.Clients.GroupExcept(room.RoomName, participant.ConnectionId)
+            .SendAsync("ParticipantConnectionStatusChanged", participant.ToDTO(), cancellationToken: cancellationToken);
+
+        await _hubContext.Groups.AddToGroupAsync(participant.ConnectionId, room.RoomName, cancellationToken);
+
+        await room.AddParticipantAsync(participant, true, cancellationToken);
+    }
 
     internal async Task ParticipantDisconnected(Participant participant, Room room,
         CancellationToken cancellationToken = default)
@@ -82,9 +109,12 @@ public class Lobby
         var newRoomDto = newRoom.ToRoomStateDto();
 
         await _hubContext.Groups.AddToGroupAsync(participant.ConnectionId, newRoom.RoomName, cancellationToken);
-        await _hubContext.Clients.GroupExcept(newRoom.RoomName, participant.ConnectionId).SendAsync("ParticipantJoined",
-            participant.ToDTO(), cancellationToken: cancellationToken);
-        await _hubContext.Clients.Group(lobbyGroupName).SendAsync("RoomStateChanged", newRoomDto);
+        
+        await _hubContext.Clients
+            .GroupExcept(newRoom.RoomName, participant.ConnectionId)
+            .SendAsync("ParticipantJoined", participant.ToDTO(), cancellationToken: cancellationToken);
+        
+        await _hubContext.Clients.Group(_lobbyGroupName).SendAsync("RoomStateChanged", newRoomDto, cancellationToken: cancellationToken);
 
         return newRoomDto;
     }
@@ -92,17 +122,26 @@ public class Lobby
     internal async Task<bool> StartEventAsync(Room room, Participant participant,
         CancellationToken cancellationToken = default)
     {
-        if (room.StartEventAsync(participant))
+        if (!room.StartEvent(participant))
         {
-            await _hubContext.Clients.Group(lobbyGroupName).SendAsync("RoomStateChanged", room.ToRoomStateDto(), cancellationToken: cancellationToken);
-            
-            _logger.LogInformation("New event started in room {Room} with {Players} players", room.RoomName,
-                room.Participants.Count);
-
-            return true;
+            return false;
         }
 
-        return false;
+        await _hubContext.Clients.Group(_lobbyGroupName).SendAsync("RoomStateChanged", room.ToRoomStateDto(), cancellationToken: cancellationToken);
+            
+        _logger.LogInformation("New event started in room {Room} with {Players} players", room.RoomName,
+            room.Participants.Count);
+
+        return true;
+
+    }
+
+    internal async Task SetRoomSettings(RoomSettings settings, Room room, Participant participant)
+    {
+        if (await room.SetRoomSettings(settings, participant))
+        {
+            await _hubContext.Clients.Group(_lobbyGroupName).SendAsync("RoomStateChanged", room.ToRoomStateDto());
+        }
     }
 
     internal Room? GetRoom(Participant? participant)
@@ -138,7 +177,11 @@ public class Lobby
 
         var newRoom = new PublicRoom(_hubContext, roomName, roomSettings, EventEndedAsync);
         AddRoom(newRoom);
-        await _hubContext.Clients.Group(lobbyGroupName).SendAsync("RoomCreated", newRoom.ToRoomStateDto());
+        
+        await _hubContext.Clients
+            .Group(_lobbyGroupName)
+            .SendAsync("RoomCreated", newRoom.ToRoomStateDto(), cancellationToken: cancellationToken);
+        
         return true;
     }
 
@@ -154,14 +197,14 @@ public class Lobby
                 {
                     _rooms.Remove(room);
                 }
-                await _hubContext.Clients.Group(lobbyGroupName).SendAsync("RoomDeleted", room.ToRoomStateDto(), cancellationToken: cancellationToken);
+                await _hubContext.Clients.Group(_lobbyGroupName).SendAsync("RoomDeleted", room.ToRoomStateDto(), cancellationToken: cancellationToken);
             }
 
             await _hubContext.Clients.GroupExcept(room.RoomName, participant.ConnectionId)
                 .SendAsync("ParticipantLeft", participant.ToDTO(), cancellationToken: cancellationToken);
             await _hubContext.Groups.RemoveFromGroupAsync(participant.ConnectionId, room.RoomName,
                 cancellationToken: cancellationToken);
-            await _hubContext.Clients.Group(lobbyGroupName).SendAsync("RoomStateChanged", room.ToRoomStateDto(),
+            await _hubContext.Clients.Group(_lobbyGroupName).SendAsync("RoomStateChanged", room.ToRoomStateDto(),
                 cancellationToken: cancellationToken);
         }
     }

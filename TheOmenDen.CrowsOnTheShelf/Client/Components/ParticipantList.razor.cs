@@ -1,21 +1,28 @@
 ﻿using Microsoft.AspNetCore.Components;
+using TheOmenDen.CrowsOnTheShelf.Client.Services;
 
 namespace TheOmenDen.CrowsOnTheShelf.Client.Components;
 
-public partial class ParticipantList: ComponentBase
+public partial class ParticipantList: ComponentBase, IDisposable
 {
-    private readonly List<String> _participants = new(10);
+    [Parameter] public Boolean ShowGiftPurchased { get; set; } = true;
+    [Inject]private ISecretSantaEventService SecretSantaEventService { get; init; }
 
-    protected override void OnInitialized()
+    private readonly List<Participant> _participants = new(10);
+
+    protected override async Task OnInitializedAsync()
     {
-        BuildTestParticipants();
+        _participants.AddRange(SecretSantaEventService.Participants);
+
+        await base.OnInitializedAsync();
+        SecretSantaEventService.ParticipantListChanged += OnParticipantListChanged;
     }
 
-    private void BuildTestParticipants()
+    private void OnParticipantListChanged(object? sender, EventArgs e) => StateHasChanged();
+
+    public void Dispose()
     {
-        for (var i = 0; i < 11; i++)
-        {
-            _participants.Add($"test{i}@test.com");
-        }
+        SecretSantaEventService.ParticipantListChanged -= OnParticipantListChanged;
+        GC.SuppressFinalize(this);
     }
 }

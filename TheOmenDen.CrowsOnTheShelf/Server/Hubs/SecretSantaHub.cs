@@ -133,12 +133,7 @@ public class SecretSantaHub: Hub
 
         var newRoom = _lobby.GetRoom(roomName);
 
-        if (newRoom is not null)
-        {
-            return await _lobby.JoinRoomAsync(participant, newRoom, password);
-        }
-
-        return null;
+        return newRoom is not null ? await _lobby.JoinRoomAsync(participant, newRoom, password) : null;
     }
 
     public async Task<bool> LeaveRoom()
@@ -163,15 +158,44 @@ public class SecretSantaHub: Hub
         var participant = GetParticipant(Context.ConnectionId);
         var room = _lobby.GetRoom(participant);
 
-        if (room is not null && participant is not null)
-        {
-            return await _lobby.StartEventAsync(room, participant);
-        }
-
-        return false;
+        return room is not null 
+               && participant is not null 
+               && await _lobby.StartEventAsync(room, participant);
     }
 
-    private Participant? GetParticipant(String connectionId)
+    public ParticipantGuids SetParticipantName(String userName)
+    {
+        Participant? participant;
+        var participantName = userName[..Math.Min(userName.Length, 16)];
+
+        lock (ParticipantsDictionary)
+        {
+            if (!ParticipantsDictionary.TryGetValue(Context.ConnectionId, out participant))
+            {
+                participant = new(Context.ConnectionId, participantName);
+                ParticipantsDictionary.Add(Context.ConnectionId, participant);
+            }
+            else
+            {
+                participant.Name = participantName;
+            }
+        }
+
+        return new ParticipantGuids(participant.Id, participant.ConnectionGuid);
+    }
+
+    public async Task SetRoomSettings(RoomSettings settings)
+    {
+        var participant= GetParticipant(Context.ConnectionId);
+        var room = _lobby.GetRoom(participant);
+        
+        if (room is not null && participant is not null)
+        {
+            await _lobby.SetRoomSettings(settings, room,participant);
+        }
+    }
+
+    private static Participant? GetParticipant(String connectionId)
     {
         lock (ParticipantsDictionary)
         {

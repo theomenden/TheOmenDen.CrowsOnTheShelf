@@ -1,0 +1,17 @@
+﻿<Div Background="Background.Transparent" Flex="Flex.InlineFlex.Row">
+    @if (Participant.IsConnected)
+    {
+        <Icon Name="IconName.UserPlus" IconSize="IconSize.Large" />
+    }
+    else
+    {
+        <SpinKit Type="SpinKitType.Chase" />
+    }
+    <Div Background="Background.Transparent">
+        <Text TextColor="@(Participant.IsConnected ? TextColor.Primary : TextColor.Muted)"
+              TextWeight="TextWeight.Bold">
+            @Participant.Name
+        </Text>
+        <Icon Name="@(Participant.IsGiftPurchased ? IconName.Gift : IconName.Hourglass)" IconSize="IconSize.Large"/>
+    </Div>
+</Div>

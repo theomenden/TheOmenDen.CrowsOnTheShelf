@@ -15,13 +15,13 @@ public class Room
     private IHubContext<SecretSantaHub> _hubContext;
     private IRoomState _roomState;
 
-    public Room(IHubContext<SecretSantaHub> context, string name, Func<Room, Task> eventEndedCallback)
+    public Room(IHubContext<SecretSantaHub> context, string name, Func<Room, CancellationToken, Task> eventEndedCallback)
         :this(context, name, new RoomSettings(), eventEndedCallback)
     {
         
     }
 
-    public Room(IHubContext<SecretSantaHub> context, string name, RoomSettings settings, Func<Room, Task> eventEndedCallback)
+    public Room(IHubContext<SecretSantaHub> context, string name, RoomSettings settings, Func<Room, CancellationToken, Task> eventEndedCallback)
     {
         _roomIndex = RoomCounter++;
         _hubContext = context;
@@ -110,6 +110,35 @@ public class Room
         }
 
         return new(RoomName, participantDtos, RoomSettings, IsEventInProgress);
+    }
+
+    internal async Task<bool> SetRoomSettings(RoomSettings roomSettings, Participant participant)
+    {
+        if (RoomState is RoomStateLobby rsl)
+        {
+            return await rsl.SetRoomSettingsAsync(roomSettings, participant);
+        }
+
+        return false;
+    }
+
+    internal bool StartEvent(Participant participant)
+    {
+        bool isFirstParticipant;
+        
+        lock (_participants)
+        {
+            isFirstParticipant = participant == _participants.FirstOrDefault();
+        }
+
+        if (!isFirstParticipant || RoomState is not RoomStateLobby rsl)
+        {
+            return false;
+        }
+
+        RoomState = new RoomStateEvent(this, rsl);
+        return true;
+
     }
 
     #region SignalR Group Send Methods

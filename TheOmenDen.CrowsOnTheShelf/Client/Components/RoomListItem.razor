@@ -1,0 +1,16 @@
+﻿<Card Background="Background.Secondary"
+      Padding="Padding.Is3.OnY.Is2.OnX">
+    <CardBody Background="Background.Transparent">
+        @if (Room.RoomSettings.IsPrivateRoom)
+        {
+            <Div Background="Background.Transparent">
+                <Icon Name="IconName.Lock" IconSize="IconSize.x3" />
+            </Div>
+        }
+        <Span Background="Background.Transparent" Border="Border.Is0.Rounded"
+              TextColor="TextColor.Light">
+            <Icon Name="IconName.UserCheck" IconSize="IconSize.x3" />
+            @Room.Participants.Count
+        </Span>
+    </CardBody>
+</Card>

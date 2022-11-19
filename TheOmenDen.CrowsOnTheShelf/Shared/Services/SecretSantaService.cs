@@ -17,7 +17,6 @@ internal sealed class SecretSantaService
         var santaStorageModel = new SecretSantaStorageModel
         {
             Budget = secretSantaGame.Budget,
-            Code = secretSantaGame.Code,
             ParticipantEmails = secretSantaGame.ParticipantEmails,
             OccurringAt = secretSantaGame.OccurringAt
         };

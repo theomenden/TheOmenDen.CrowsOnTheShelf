@@ -4,6 +4,15 @@
       "type": "identityapp",
       "connectionId": "AzureAD:ClientSecret",
       "dynamicId": null
+    },
+    "secrets1": {
+      "type": "secrets",
+      "connectionId": "VaultUri"
+    },
+    "signalr1": {
+      "type": "signalr",
+      "connectionId": "Azure:SignalR:ConnectionString",
+      "dynamicId": null
     }
   }
 }

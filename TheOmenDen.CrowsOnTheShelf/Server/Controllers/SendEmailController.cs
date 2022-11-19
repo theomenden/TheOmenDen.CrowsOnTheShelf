@@ -7,12 +7,10 @@ namespace TheOmenDen.CrowsOnTheShelf.Server.Controllers;
 public class SendEmailController : ControllerBase
 {
     private readonly ILogger<SendEmailController> _logger;
-    private readonly ISendEmailService _sendEmailService;
 
-    public SendEmailController(ILogger<SendEmailController> logger, ISendEmailService _sendEmailService)
+    public SendEmailController(ILogger<SendEmailController> logger)
     {
         _logger= logger;
-        _sendEmailService= _sendEmailService;
     }
 
 

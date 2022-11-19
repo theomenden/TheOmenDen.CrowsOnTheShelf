@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Builder;
 using TheOmenDen.CrowsOnTheShelf.Server.Hubs;
 using SendGrid.Extensions.DependencyInjection;
-
+using TheOmenDen.CrowsOnTheShelf.Server.Lobbies;
+using Azure.Identity;
+           
 #region Bootstrap Logger
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
@@ -42,6 +44,7 @@ try
 
     builder.Services.AddSendGrid(options => options.ApiKey = builder.Configuration["crowsagainstemails"]);
     builder.Services.AddSignalR();
+    builder.Services.AddSingleton<Lobby>();
     builder.Services.AddResponseCompression(opts =>
     {
         opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
@@ -75,12 +78,12 @@ try
     app.UseRouting();
 
     app.UseAuthorization();
-
-
+    
     app.MapRazorPages();
     app.MapControllers();
+    app.MapHub<SecretSantaHub>(SecretSantaHub.HubUrl);
+    app.MapHub<ClientLogHub>(ClientLogHub.HubUrl);
 
-    app.MapHub<ChatHub>("/chatHub");
     app.MapFallbackToFile("index.html");
 
     await app.RunAsync();

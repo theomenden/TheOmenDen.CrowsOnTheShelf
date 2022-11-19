@@ -8,7 +8,7 @@ public partial class Index: ComponentBase
 {
     [Inject] private IModalService ModalService { get; init; }
 
-    private Task LaunchCreateSantaGroupAsync() => ModalService.Show<CreateSantaGroup>(String.Empty, new ModalInstanceOptions()
+    private Task LaunchCreateSantaGroupAsync() => ModalService.Show<CreateSantaGroup>(String.Empty, new ModalInstanceOptions
     {
         Scrollable = true,
         Size = ModalSize.ExtraLarge,
