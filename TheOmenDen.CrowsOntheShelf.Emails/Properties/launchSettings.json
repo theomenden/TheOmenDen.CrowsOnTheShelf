@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "TheOmenDen.CrowsOntheShelf.Emails": {
-      "commandName": "Project",
-      "commandLineArgs": "--port 7210",
-      "launchBrowser": false
-    }
-  }
-}
