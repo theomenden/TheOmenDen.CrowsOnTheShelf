@@ -1,0 +1,65 @@
+﻿@inherits LayoutComponentBase
+@layout RootLayout
+
+<Layout>
+    <LayoutHeader Fixed>
+        <Bar Mode="BarMode.Horizontal" ThemeContrast="ThemeContrast.Dark"
+             Background="Background.Dark">
+            <BarToggler />
+            <BarBrand>
+                <BarItem>
+                    <BarLink To="">
+                        Crows On The Shelf <BarIcon IconName="IconName.Dashboard" />
+                    </BarLink>
+                </BarItem>
+            </BarBrand>
+            <BarMenu>
+                <BarStart />
+            <BarEnd>
+                <LoginDisplay />
+            </BarEnd>
+            </BarMenu>
+        </Bar>
+    </LayoutHeader>
+    <LayoutContent>
+        @Body
+    </LayoutContent>
+    <LayoutFooter Fixed>
+    <Bar Mode="BarMode.Horizontal" ThemeContrast="ThemeContrast.Dark" Background="Background.Dark">
+        <BarToggler />
+        <BarBrand>
+        <BarItem>
+            <BarLink To="">
+                Crows On The Shelf <BarIcon IconName="IconName.Dashboard" />
+            </BarLink>
+        </BarItem>
+        </BarBrand>
+        <BarMenu>
+            <BarStart>
+                <BarItem>
+                    <BarDropdown>
+                        <BarDropdownToggle>
+                            Policies <BarIcon IconName="IconName.File"/>
+                        </BarDropdownToggle>
+                        <BarDropdownMenu>
+                            <BarDropdownItem To="policies/privacy">
+                                Privacy Policy <BarIcon IconName="IconName.Lock"/>
+                            </BarDropdownItem>
+                            <BarDropdownItem To="policies/terms-of-service">
+                                Terms of Service <BarIcon IconName="IconName.BalanceScale"/>
+                            </BarDropdownItem>
+                            <BarDropdownItem To="policies/accessibility">
+                                Accessibility <BarIcon IconName="IconName.Wheelchair"/>
+                            </BarDropdownItem>
+                        </BarDropdownMenu>
+                    </BarDropdown>
+                </BarItem>
+            </BarStart>
+            <BarEnd>
+                <DeveloperAboutBarItem />
+            </BarEnd>
+        </BarMenu>
+         
+    </Bar>
+    </LayoutFooter>
+</Layout>

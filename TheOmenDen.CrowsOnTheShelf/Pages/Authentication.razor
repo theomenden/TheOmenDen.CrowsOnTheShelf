@@ -1,0 +1,25 @@
+﻿@page "/authentication/{action}"
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+<RemoteAuthenticatorView Action="@Action" OnLogInSucceeded="@OnLoginCompletedAsync" LogInFailed="@LoginFailedFragment" />
+
+@code {
+    [Parameter] public string? Action { get; set; }
+
+    [Inject] private ILoadingIndicatorService LoadingIndicatorService { get; init; }
+
+    private static RenderFragment<string> LoginFailedFragment = (string message) => __builder =>
+    {
+        <Alert Color="Color.Danger">
+            <AlertMessage>
+                Login Failed <Icon Name="IconName.ExclamationCircle"/>
+            </AlertMessage>
+            <AlertDescription>
+                @message
+            </AlertDescription>
+            <CloseButton/>
+        </Alert>
+    };
+
+    private Task OnLoginCompletedAsync() =>  LoadingIndicatorService.Hide();
+
+}

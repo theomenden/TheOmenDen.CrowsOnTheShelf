@@ -1,0 +1,49 @@
+﻿<PageTitle>@Title</PageTitle>
+<HeadContent>
+    <meta name="title" content="@Title"/>
+    <meta name="description" content="@Description"/>
+
+    <meta name="og:title" content="@Title"/>
+    <meta name="og:description" content="@Description"/>
+    <meta name="og:url" content="@_url"/>
+    <meta name="og:type" content="website"/>
+    <meta name="og:site_name" content="Crows Against Humility"/>
+    <meta name="og:image" content="@ImageUrl"/>
+    
+    <meta name="twitter:title" content="@Title"/>
+    <meta name="twitter:description" content="@Description" />
+    <meta name="twitter:url" content="@_url" />
+    <meta name="twitter:site" content="Crows Against Humility"/>
+    <meta name="twitter:creator" content="The Omen Den" />
+    <meta name="twitter:image" content="@ImageUrl" />
+    <link rel="canonical" href="@_url" />
+</HeadContent>
+@code
+{
+    #region Parameters
+    [Parameter] public String Title { get; set; }
+    [Parameter] public String Description { get; set; }
+    [Parameter] public String Canonical { get; set; }
+    [Parameter] public String ImageUrl { get; set; }
+    #endregion
+    #region Injected Members
+    [Inject] private NavigationManager NavigationManager { get; init; }
+    #endregion
+    #region Private Members
+    private String _url = String.Empty;
+    #endregion
+    #region Lifecycle Methods
+
+    protected override void OnInitialized()
+    {
+        _url = NavigationManager.ToAbsoluteUri(Canonical).AbsoluteUri;
+
+        ImageUrl = String.IsNullOrEmpty(ImageUrl)
+            ? NavigationManager.ToAbsoluteUri("images/the-omen-den-logo.png").AbsoluteUri
+            : NavigationManager.ToAbsoluteUri(ImageUrl).AbsoluteUri;
+
+        base.OnInitialized();
+    }
+
+    #endregion
+}

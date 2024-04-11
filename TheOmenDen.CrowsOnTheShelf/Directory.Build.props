@@ -1,0 +1,19 @@
+<Project>
+	<PropertyGroup>
+		<Date>$([System.DateTime]::Now.ToString("0.M.d.HHmm"))</Date>
+		<AssemblyFileVersionAttribute>[assembly:System.Reflection.AssemblyFileVersion("$(Date)")]$([System.Environment]::NewLine)</AssemblyFileVersionAttribute>
+		<AssemblyVersionAttribute>[assembly:System.Reflection.AssemblyVersion("$(Date)")]$([System.Environment]::NewLine)</AssemblyVersionAttribute>
+		<AssemblyCompanyAttribute>[assembly:System.Reflection.AssemblyCompany("The Omen Den L.L.C.")]$([System.Environment]::NewLine)</AssemblyCompanyAttribute>
+		<Description>A simple gift exchange application meant for minimal interactions and authentication</Description>
+		<Company>The Omen Den L.L.C.</Company>
+		<Copyright>2021-2024</Copyright>
+		<Authors>Andrew Diego Beers (Alu)</Authors>
+		<Product>Crows on the Shelf</Product>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>annotations</Nullable>
+		<Title>The Omen Den's Crows on the Shelf</Title>
+	</PropertyGroup>
+	<Target Name="GenerateVersionInfo" BeforeTargets="BeforeBuild">
+		<WriteLinesToFile File="Properties\VersionInfo.cs" Lines="$(AssemblyFileVersionAttribute)$(AssemblyCompanyAttribute)$(AssemblyVersionAttribute)" Overwrite="true"></WriteLinesToFile>
+	</Target>
+</Project>

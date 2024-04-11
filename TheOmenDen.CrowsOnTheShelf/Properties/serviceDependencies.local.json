@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "connectionInfo": "App registration: Crows on the Shelf, Tenant: The Omen Den L.L.C. (theomenden.com - Microsoft Entra ID)",
+      "secretStore": null,
+      "type": "identityapp.secretStore",
+      "connectionId": "AzureAD:ClientSecret"
+    },
+    "secrets1": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/ClientSecureVault",
+      "type": "secrets.keyVault",
+      "connectionId": "VaultUri"
+    }
+  }
+}

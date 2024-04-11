@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject LoadingIndicatorService LoadingIndicatorService
+@inject NavigationManager Navigation
+
+<AuthorizeView>
+    <Authorized>
+        <Span>
+        Hello, @context.User.Identity?.Name!
+        <Button Type="ButtonType.Link" Color="Color.Link" Shadow="Shadow.Small" @onclick="BeginLogOut">Log out <BarIcon IconName="IconName.Lock" /></Button>
+        </Span>
+    </Authorized>
+    <NotAuthorized>
+        <Button Type="ButtonType.Link" Color="Color.Success" Shadow="Shadow.Small" Clicked="@LoadingIndicatorService.Show" To="authentication/login">Log in <BarIcon IconName="IconName.Unlock" /></Button>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+    public void BeginLogOut()
+    {
+        Navigation.NavigateToLogout("authentication/logout");
+    }
+}

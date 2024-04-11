@@ -1,0 +1,69 @@
+@inherits LayoutComponentBase
+@layout RootLayout
+<Layout>
+    <LayoutHeader>
+        <Bar Background="Background.Light"
+             ThemeContrast="ThemeContrast.Light"
+             Mode="BarMode.Horizontal">
+            <BarToggler Mode="BarTogglerMode.Popout" Bar="@_sideBarRef" />
+            <BarBrand TextColor="TextColor.Dark">
+                Crows On The Shelf
+            </BarBrand>
+            <BarMenu>
+                <BarStart />
+                <BarEnd>
+                    <LoginDisplay />
+                </BarEnd>
+            </BarMenu>
+        </Bar>
+    </LayoutHeader>
+    <Layout Sider>
+        <LayoutSider>
+            <LayoutSiderContent>
+                <Bar ThemeContrast="ThemeContrast.Dark"
+                     Breakpoint="Breakpoint.Desktop"
+                     NavigationBreakpoint="Breakpoint.Tablet"
+                     Mode="BarMode.VerticalPopout"
+                     CollapseMode="BarCollapseMode.Small"
+                     @ref="@_sideBarRef">
+                    <BarBrand>
+                        <BarItem>
+                            <BarLink To="">
+                                The Omen Den <BarIcon IconName="IconName.Dashboard" />
+                            </BarLink>
+                        </BarItem>
+                    </BarBrand>
+                    <BarMenu>
+                        <BarStart />
+                        <BarEnd>
+                            <BarItem>
+                                <BarDropdown>
+                                    <BarDropdownToggle>
+                                        Policies <BarIcon IconName="IconName.File" />
+                                    </BarDropdownToggle>
+                                    <BarDropdownMenu>
+                                        <BarDropdownItem To="policies/privacy">
+                                            Privacy Policy <BarIcon IconName="IconName.Lock" />
+                                        </BarDropdownItem>
+                                        <BarDropdownItem To="policies/terms-of-service">
+                                            Terms of Service <BarIcon IconName="IconName.BalanceScale" />
+                                        </BarDropdownItem>
+                                        <BarDropdownItem To="policies/accessibility">
+                                            Accessibility <BarIcon IconName="IconName.Wheelchair" />
+                                        </BarDropdownItem>
+                                    </BarDropdownMenu>
+                                </BarDropdown>
+                            </BarItem>
+                            <DeveloperAboutBarItem />
+                        </BarEnd>
+                    </BarMenu>
+                </Bar>
+            </LayoutSiderContent>
+        </LayoutSider>
+        <Layout>
+            <LayoutContent>
+                @Body
+            </LayoutContent>
+        </Layout>
+    </Layout>
+</Layout>

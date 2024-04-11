@@ -1,0 +1,16 @@
+﻿@using TheOmenDen.CrowsOnTheShelf.Data
+<BarItem>
+    <BarDropdown>
+        <BarDropdownToggle>
+            About <BarIcon IconName="IconName.Info"/>
+        </BarDropdownToggle>
+        <BarDropdownMenu>
+            <BarDropdownItem>
+                Version @AssemblyValuesForBars.AssemblyProductVersion <BarIcon IconName="IconName.Code"/>
+            </BarDropdownItem>
+            <BarDropdownItem>
+                Company: @AssemblyValuesForBars.ApplicationDevelopmentCompany&trade; <BarIcon IconName="IconName.Building"/>
+            </BarDropdownItem>
+        </BarDropdownMenu>
+    </BarDropdown>
+</BarItem>
