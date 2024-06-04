@@ -26,7 +26,7 @@
 		<PackageReference Include="Blazorise.Components" Version="1.5.3" />
 		<PackageReference Include="Blazorise.FluentUI2" Version="1.5.3" />
 		<PackageReference Include="Blazorise.Icons.FluentUI" Version="1.5.3" />
-		<PackageReference Include="Blazorise.LoadingIndicator" Version="1.5.2" />
+		<PackageReference Include="Blazorise.LoadingIndicator" Version="1.5.3" />
 		<PackageReference Include="Blazorise.QRCode" Version="1.5.2" />
 		<PackageReference Include="Blazorise.SpinKit" Version="1.5.3" />
 		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
