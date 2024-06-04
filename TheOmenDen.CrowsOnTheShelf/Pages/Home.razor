@@ -1,7 +1,151 @@
 ﻿@page "/"
+<SEO Canonical="/"
+     Description="Welcome to Crows on the Shelf! A gift exchange platform in the spirit of a secret santa event!"
+     Title="Crows on the Shelf" />
+<Jumbotron TextAlignment="TextAlignment.Center">
+    <JumbotronTitle Size="JumbotronTitleSize.Is2">Welcome to Crows on the Shelf!</JumbotronTitle>
+    <JumbotronSubtitle>Looking to setup a Secret Santa this year?</JumbotronSubtitle>
+    <Paragraph>Then we're here to help you out. Elegant, fast, and reliable</Paragraph>
+</Jumbotron>
 
-<PageTitle>Home</PageTitle>
+<Container Fluid Padding="Padding.Is4.OnX">
+    <Div Margin="Margin.IsAuto.OnX">
+        <Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom" TextAlignment="TextAlignment.Center">
+            Find the right plan for your event!
+        </Heading>
 
-<h1>Hello, world!</h1>
+        <Paragraph Margin="Margin.Is4.OnY" TextAlignment="TextAlignment.Center">
+            The Omen Den has got you covered with three different plans to choose from. Whether you're looking to host a small event or a large one, we've got you covered.
+        </Paragraph>
 
-Welcome to your new app.
+        <CardDeck>
+            <Card Shadow="Shadow.Default">
+                <CardBody>
+                    <CardTitle Size="2" TextAlignment="TextAlignment.Center">
+                        Personal
+                    </CardTitle>
+                    <CardText TextAlignment="TextAlignment.Center">
+                        Perfect for a smaller event, like a family gathering or a small office party.
+                    </CardText>
+                </CardBody>
+                <CardBody Flex="Flex.JustifyContent.Center.AlignItems.Baseline">
+                    <DisplayHeading Size="DisplayHeadingSize.Is4">
+                        Free! $0.00
+                    </DisplayHeading>
+                    <Text>
+                        For a group of up to 10 participants!
+                    </Text>
+                </CardBody>
+                <CardBody>
+                    <UnorderedList Unstyled>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>10 Participants</Text>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>All Current Features</Text>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>Use on <Strong>1 (one)</Strong> event</Text>
+                        </UnorderedListItem>
+                    </UnorderedList>
+                    <Button Color="Color.Primary" Outline Block>
+                        Choose Personal
+                    </Button>
+                </CardBody>
+            </Card>
+            <Card Shadow="Shadow.Default">
+                <CardBody>
+                    <CardTitle Size="2" TextAlignment="TextAlignment.Center">
+                        Business
+                    </CardTitle>
+                    <CardText TextAlignment="TextAlignment.Center">
+                        Perfect for using in a larger setting, like a company-wide event or a large family gathering.
+                    </CardText>
+                </CardBody>
+                <CardBody Flex="Flex.JustifyContent.Center.AlignItems.Baseline">
+                    <DisplayHeading Size="DisplayHeadingSize.Is4">
+                        $19.99
+                    </DisplayHeading>
+                    <Text>
+                        For a group of up to 50 participants!
+                    </Text>
+                </CardBody>
+                <CardBody>
+                    <UnorderedList Unstyled>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>50 Participants</Text>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>All Current Features</Text>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>Use on <Strong>3 (Three)</Strong> large events</Text>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>Premium support: </Text><Strong>4 months</Strong>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>Free updates: </Text><Strong>4 months</Strong>
+                        </UnorderedListItem>
+                    </UnorderedList>
+                    <Button Color="Color.Primary" Block>
+                        Choose Business
+                    </Button>
+                </CardBody>
+            </Card>
+            <Card Shadow="Shadow.Default">
+                <CardBody>
+                    <CardTitle Size="2" TextAlignment="TextAlignment.Center">
+                        Enterprise
+                    </CardTitle>
+                    <CardText TextAlignment="TextAlignment.Center">
+                        Perfect for a set of events, varying in size and scope. Ideal for a large company or a large family.
+                    </CardText>
+                </CardBody>
+                <CardBody Flex="Flex.JustifyContent.Center.AlignItems.Baseline">
+                    <DisplayHeading Size="DisplayHeadingSize.Is4">
+                        $50.99
+                    </DisplayHeading>
+                    <Text>
+                        /month
+                    </Text>
+                </CardBody>
+                <CardBody>
+                    <UnorderedList Unstyled>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>Unlimited Participants, Unlimited Events</Text>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>All Current &amp; Advanced Features</Text>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>Use on Unlimited events</Text>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>Premium support: </Text><Strong>12 months</Strong>
+                        </UnorderedListItem>
+                        <UnorderedListItem Padding="Padding.Is2.OnY">
+                            <Icon Name="IconName.Check" TextColor="TextColor.Success" />
+                            <Text>Free updates: </Text><Strong>12 months</Strong>
+                        </UnorderedListItem>
+                    </UnorderedList>
+                    <Button Color="Color.Primary" Outline Block>
+                        Choose Enterprise
+                    </Button>
+                </CardBody>
+            </Card>
+        </CardDeck>
+    </Div>
+</Container>

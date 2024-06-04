@@ -2,17 +2,19 @@
 @layout RootLayout
 <Layout>
     <LayoutHeader>
-        <Bar Background="Background.Light"
-             ThemeContrast="ThemeContrast.Light"
-             Mode="BarMode.Horizontal">
+        <Bar Background="Background.Dark"
+             ThemeContrast="ThemeContrast.Dark"
+             Mode="BarMode.Horizontal"
+             Breakpoint="Breakpoint.Desktop">
             <BarToggler Mode="BarTogglerMode.Popout" Bar="@_sideBarRef" />
-            <BarBrand TextColor="TextColor.Dark">
+            <BarBrand>
                 Crows On The Shelf
             </BarBrand>
             <BarMenu>
-                <BarStart />
                 <BarEnd>
-                    <LoginDisplay />
+                    <BarItem>
+                        <LoginDisplay/>
+                    </BarItem>
                 </BarEnd>
             </BarMenu>
         </Bar>

@@ -1,21 +1,16 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using TheOmenDen.CrowsOnTheShelf;
-using Azure.Identity;
 using BlazorDexie.Extensions;
 using Blazorise;
+using Blazorise.Bootstrap5;
 using Blazorise.Captcha.ReCaptcha;
-using Blazorise.FluentUI2;
-using Blazorise.Icons.FluentUI;
+using Blazorise.Icons.FontAwesome;
 using Blazorise.LoadingIndicator;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Serilog;
-using Serilog.Core;
 using Serilog.Enrichers.Sensitive;
 using Serilog.Formatting.Compact;
 using Serilog.Sinks.SystemConsole.Themes;
-using TheOmenDen.CrowsOnTheShelf.Services;
-using TheOmenDen.CrowsOnTheShelf.Utils;
+using TheOmenDen.CrowsOnTheShelf;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -38,15 +33,25 @@ try
 {
     var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
-    builder.Services.AddLogging(loggingBuilder => loggingBuilder.ClearProviders().AddSerilog(Log.Logger, dispose: true));
+    builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(new LoggerConfiguration()
+        .ReadFrom.Configuration(builder.Configuration)
+        .Enrich.FromLogContext()
+        .Enrich.WithSensitiveDataMasking(options =>
+        {
+            options.Mode = MaskingMode.Globally;
+            options.MaskingOperators = [new CreditCardMaskingOperator(), new EmailAddressMaskingOperator()];
+        })
+        .WriteTo.BrowserConsole()
+        .CreateLogger(), dispose: true));
 
     builder.Services.AddBlazorise(options =>
         {
             options.Immediate = true;
             options.ProductToken = builder.Configuration.GetSection("Blazorise")["Token"];
+            options.IconStyle = IconStyle.DuoTone;
         })
-        .AddFluentUI2Providers()
-        .AddFluentUIIcons()
+        .AddBootstrap5Providers()
+        .AddFontAwesomeIcons()
         .AddLoadingIndicator()
         .AddBlazoriseGoogleReCaptcha(options =>
         {
