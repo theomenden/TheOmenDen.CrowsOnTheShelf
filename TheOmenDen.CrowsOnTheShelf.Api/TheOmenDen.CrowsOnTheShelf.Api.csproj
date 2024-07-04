@@ -24,7 +24,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="FastEndpoints.Security" Version="5.26.0" />
+		<PackageReference Include="FastEndpoints.Security" Version="5.27.0" />
 		<PackageReference Include="FastEndpoints.Swagger" Version="5.26.0" />
 		<PackageReference Include="Mediator.Abstractions" Version="2.1.7" />
 		<PackageReference Include="Mediator.SourceGenerator" Version="2.1.7">
