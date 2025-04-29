@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Ardalis.SmartEnum" Version="8.0.0" />
+		<PackageReference Include="Ardalis.SmartEnum" Version="8.2.0" />
 		<PackageReference Include="Ardalis.SmartEnum.EFCore" Version="8.0.0" />
 		<PackageReference Include="Ardalis.SmartEnum.MessagePack" Version="8.0.0" />
 		<PackageReference Include="Ardalis.SmartEnum.SystemTextJson" Version="8.0.0" />
