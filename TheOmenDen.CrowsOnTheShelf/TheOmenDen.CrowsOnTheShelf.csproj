@@ -26,7 +26,7 @@
 		<PackageReference Include="Azure.Identity" Version="1.13.2" />
 		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />
 		<PackageReference Include="BlazorDexie" Version="1.6.5" />
-		<PackageReference Include="Blazorise" Version="1.5.3" />
+		<PackageReference Include="Blazorise" Version="1.7.6" />
 		<PackageReference Include="Blazorise.Animate" Version="1.5.3" />
 		<PackageReference Include="Blazorise.Bootstrap5" Version="1.5.3" />
 		<PackageReference Include="Blazorise.Captcha.ReCaptcha" Version="1.5.3" />
