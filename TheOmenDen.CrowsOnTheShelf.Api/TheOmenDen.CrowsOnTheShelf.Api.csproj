@@ -75,7 +75,7 @@
 		<PackageReference Include="Serilog.Enrichers.Sensitive" Version="1.7.3" />
 		<PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
 		<PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
-		<PackageReference Include="Serilog.Sinks.Async" Version="2.0.0" />
+		<PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
 		<PackageReference Include="SerilogAnalyzer" Version="0.15.0" />
 		<PackageReference Include="SonarAnalyzer.CSharp" Version="9.28.0.94264">
 			<PrivateAssets>all</PrivateAssets>
